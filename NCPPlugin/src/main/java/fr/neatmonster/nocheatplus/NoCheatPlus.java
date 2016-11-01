@@ -361,6 +361,7 @@ public class NoCheatPlus extends JavaPlugin implements NoCheatPlusAPI {
      * @return
      */
     public int sendAdminNotifyMessageStored(final String message) {
+		Bukkit.getPluginManager().callEvent(new NCPEvent(message));	
         final Set<String> names = nameSetPerms.getPlayers(Permissions.NOTIFY);
         if (names == null) return 0;
         int done = 0;
@@ -371,7 +372,8 @@ public class NoCheatPlus extends JavaPlugin implements NoCheatPlusAPI {
             }
             final Player player = DataManager.getPlayerExact(name);
             if (player != null) {
-                player.sendMessage(message);
+				
+				player.sendMessage(message);
                 done ++;
             }
         }
